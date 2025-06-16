@@ -1,55 +1,50 @@
 {
-  description = "my-desktop-flake";
+  description = "NixOS configuration for lain";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    # Home Manager configuration
-    homeConfigurations = {
-      "lain" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          hyprland.homeManagerModules.default
-          ./home.nix
-        ];
-        extraSpecialArgs = { inherit inputs; };
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      lib = nixpkgs.lib;
+    in
+    {
+      nixosConfigurations = {
+        navi = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs pkgs lib; };
+          modules = [
+            ./modules/system/configuration.nix
+            ./modules/hardware/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs pkgs lib; };
+              home-manager.users.lain = {
+                imports = [ ./modules/home-manager/users/lain/user-specific.nix ];
+              };
+            }
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        "lain@nixos" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs pkgs lib; };
+          modules = [
+            ./modules/home-manager/users/lain/user-specific.nix
+            ./modules/home-manager/home.nix
+          ];
+        };
       };
     };
-
-    # NixOS configuration 
-    nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          hyprland.nixosModules.default
-          ./configuration.nix
-        ];
-        specialArgs = { inherit inputs; };
-      };
-    };
-
-    # Development shell for easy installation
-    devShells.${system}.default = pkgs.mkShell {
-      buildInputs = [
-        pkgs.home-manager
-        pkgs.git
-      ];
-      
-      shellHook = ''
-        echo "🚀 Desktop Environment Flake Setup"
-        echo "Run: home-manager switch --flake .#lain"
-        echo "Or for NixOS: sudo nixos-rebuild switch --flake .#desktop"
-      '';
-    };
-  };
 }
