@@ -103,7 +103,6 @@ in
 
   
   home.activation.copyWaybarScripts = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    cp -r ${dotfilesDir}/waybar/custom ${config.home.homeDirectory}/.config/waybar/custom 
     chmod +x ${config.home.homeDirectory}/.config/waybar/custom/*
     chmod +x ${config.home.homeDirectory}/.config/waybar/custom/spotify/*
   '';
