@@ -96,7 +96,7 @@ in
 
     ".config/neofetch/config.conf".source = lib.mkDefault "${dotfilesDir}/neofetch/config.conf"; 
 
-    ".config/mako/config".source = lib.mkDefault "${dotfilesDir}/mako/config.conf"; 
+    ".config/mako/config".source = lib.mkDefault "${dotfilesDir}/mako/config"; 
   };
 
   
