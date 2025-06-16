@@ -74,28 +74,29 @@ in
   };
 
   xdg.configFile = {
-    "kitty/kitty.conf".source = "${dotfilesDir}/kitty/kitty.conf"; # Use dotfilesDir
+    "kitty/kitty.conf".source = "${dotfilesDir}/kitty/kitty.conf"; 
   };
   
   
   home.file = {
-    ".config/hypr/hyprland.conf".source = lib.mkDefault "${dotfilesDir}/hypr/hyprland.conf"; # Use dotfilesDir
-    ".config/hypr/wp.jpg".source = lib.mkDefault "${dotfilesDir}/hypr/wp.jpg"; # Use dotfilesDir
+    ".config/hypr/hyprland.conf".source = lib.mkDefault "${dotfilesDir}/hypr/hyprland.conf"; 
+    ".config/hypr/wp.jpg".source = lib.mkDefault "${dotfilesDir}/hypr/wp.jpg"; 
     
-    ".config/waybar/config.jsonc".source = lib.mkDefault "${dotfilesDir}/waybar/config.jsonc"; # Use dotfilesDir
-    ".config/waybar/mocha.css".source = lib.mkDefault "${dotfilesDir}/waybar/mocha.css"; # Use dotfilesDir
-    ".config/waybar/style.css".source = lib.mkDefault "${dotfilesDir}/waybar/style.css"; # Use dotfilesDir
+    ".config/waybar/config.jsonc".source = lib.mkDefault "${dotfilesDir}/waybar/config.jsonc"; 
+    ".config/waybar/mocha.css".source = lib.mkDefault "${dotfilesDir}/waybar/mocha.css"; 
+    ".config/waybar/style.css".source = lib.mkDefault "${dotfilesDir}/waybar/style.css"; 
     
-    ".config/waybar/custom/focus_class.sh".source = lib.mkDefault "${dotfilesDir}/waybar/custom/focus_class.sh"; # Use dotfilesDir
-    ".config/waybar/custom/spotify/mediaplayer.py".source = lib.mkDefault "${dotfilesDir}/waybar/custom/spotify/mediaplayer.py"; # Use dotfilesDir
+    ".config/waybar/custom/focus_class.sh".source = lib.mkDefault "${dotfilesDir}/waybar/custom/focus_class.sh"; 
+    ".config/waybar/custom/spotify/mediaplayer.py".source = lib.mkDefault "${dotfilesDir}/waybar/custom/spotify/mediaplayer.py"; 
 
     
-    ".config/rofi/colors.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/colors.rasi"; # Use dotfilesDir
-    ".config/rofi/config.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/config.rasi"; # Use dotfilesDir
-    ".config/rofi/fonts.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/fonts.rasi"; # Use dotfilesDir
+    ".config/rofi/colors.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/colors.rasi"; 
+    ".config/rofi/config.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/config.rasi"; 
+    ".config/rofi/fonts.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/fonts.rasi"; 
 
-    
-    ".config/neofetch/config.conf".source = lib.mkDefault "${dotfilesDir}/neofetch/config.conf"; # Use dotfilesDir
+    ".config/neofetch/config.conf".source = lib.mkDefault "${dotfilesDir}/neofetch/config.conf"; 
+
+    ".config/mako/config".source = lib.mkDefault "${dotfilesDir}/mako/config.conf"; 
   };
 
   
