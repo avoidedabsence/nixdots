@@ -42,7 +42,6 @@ in
     btop 
   ];
 
-  
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -104,9 +103,9 @@ in
 
   
   home.activation.copyWaybarScripts = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    
-    chmod +x ${config.home.homeDirectory}/.config/waybar/custom/*.sh
-    chmod +x ${config.home.homeDirectory}/.config/waybar/custom/spotify/*.py
+    cp -r ${dotfilesDir}/waybar/custom ${config.home.homeDirectory}/.config/waybar/custom 
+    chmod +x ${config.home.homeDirectory}/.config/waybar/custom/*
+    chmod +x ${config.home.homeDirectory}/.config/waybar/custom/spotify/*
   '';
 
   

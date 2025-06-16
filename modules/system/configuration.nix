@@ -86,7 +86,6 @@
     shadowsocks-libev
     proxychains-ng
     wayland
-    nerd-fonts.fira-code
     material-design-icons material-symbols noto-fonts-emoji symbola fira fira-code meslo-lgs-nf font-awesome
     grim slurp wl-clipboard
   ];

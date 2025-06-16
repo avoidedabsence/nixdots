@@ -41,7 +41,7 @@
       };
 
       homeConfigurations = {
-        "lain@nixos" = home-manager.lib.homeManagerConfiguration {
+        "lain@navi" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
           modules = [
