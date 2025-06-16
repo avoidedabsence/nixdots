@@ -36,7 +36,7 @@ configuration {
     active-background:           var(active);
     active-foreground:           var(background);
     selected-normal-background:  var(selected);
-    selected-normal-foreground:  var(background);
+    selected-normal-foreground:  var(foreground);
     selected-urgent-background:  var(active);
     selected-urgent-foreground:  var(background);
     selected-active-background:  var(urgent);
@@ -56,7 +56,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       400px;
+    width:                       800px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -64,12 +64,14 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      0px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
+    border:                      1px solid;
+    border-radius:               15px;
+    border-color:                rgba(255, 255, 255, 0.2);
     cursor:                      "default";
-    /* Backgroud Colors */
-    background-color:            @background-colour;
+    /* Ultra-transparent liquid glass effect */
+    background-color:            rgba(20, 20, 30, 0.3);
+    /* Add blur effect */
+    //backdrop-filter:             blur(20px);
     /* Backgroud Image */
     //background-image:          url("/path/to/image.png", none);
     /* Simple Linear Gradient */
@@ -250,7 +252,7 @@ element-text {
 
 /*****----- Mode Switcher -----*****/
 mode-switcher{
-    enabled:                     true;
+    enabled:                     false;
     spacing:                     10px;
     margin:                      0px;
     padding:                     0px;

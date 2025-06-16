@@ -3,9 +3,10 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      <home-manager/nixos>
+      ./hardware-configuration.nix  # Comment out for flake usage
     ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -14,7 +15,19 @@
   #  networking.tun.enable = true;
   networking.hostName = "navi";
   networking.networkmanager.enable = true;
-
+  
+  systemd.services.shadowsocks = {
+    description = "Shadowsocks-libev proxy";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = ''
+        ${pkgs.shadowsocks-libev}/bin/ss-local \
+          -c "/home/lain/proj/cfg.json"
+      '';
+      Restart = "always";
+    };
+  };
+  
   time.timeZone = "Europe/Moscow";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -75,21 +88,34 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    zsh kitty
-    firefox spotify neovim vscode telegram-desktop
-    nekoray
-    git postgresql redis clickhouse python3 poetry
-    pavucontrol networkmanagerapplet rofi nwg-look waybar xfce.thunar hyprland hyprlock hyprshot hypridle
+    # Terminal
+    zsh kitty zsh-powerlevel10k
+    # System necessities
+    home-manager stdenv.cc.cc.lib gcc-unwrapped.lib shadowsocks-libev proxychains zlib
+    # Desktop environment necessities
+    hyprland xfce.thunar wayland waybar mako
+    # Fonts
+    nerd-fonts.fira-code material-design-icons material-symbols noto-fonts-emoji symbola fira fira-code meslo-lgs-nf font-awesome 
+    # Programs
+    firefox spotify vscode telegram-desktop
+    # DevOps & other development stuff
+    git postgresql redis clickhouse python3 poetry postman ruff btop
+    # Eye-candy & comfort
+    pavucontrol networkmanagerapplet rofi hyprlock hyprshot hypridle swaybg neofetch killall
+    # Screenshots
     grim slurp wl-clipboard
   ];
 
   services.postgresql.enable = true;
   services.redis.enable = true;
-  services.clickhouse.enable = true;
+  services.clickhouse = {
+    enable = true;
+    package = pkgs.clickhouse;
+  };
   
   environment.variables.EDITOR = "code";
   environment.variables.TERM = "kitty";  
   environment.variables.NIXOS_OZONE_WL = "1";
-
+  environment.variables.LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.gcc-unwrapped.lib}/lib:$LD_LIBRARY_PATH";
   system.stateVersion = "25.05";
 }
