@@ -86,8 +86,18 @@
     shadowsocks-libev
     proxychains-ng
     wayland
-    material-design-icons material-symbols noto-fonts-emoji symbola fira fira-code meslo-lgs-nf font-awesome
     grim slurp wl-clipboard
+  ];
+
+  fonts.packages = with pkgs; [      
+    material-design-icons
+    material-symbols
+    noto-fonts-emoji
+    symbola
+    fira
+    fira-code
+    meslo-lgs-nf
+    font-awesome
   ];
 
   services.postgresql = {

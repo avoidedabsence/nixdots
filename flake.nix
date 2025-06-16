@@ -12,7 +12,6 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
-      # Apply allowUnfree to the nixpkgs instance used by the flake
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;

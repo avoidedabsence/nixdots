@@ -11,11 +11,9 @@ let
 in
 {
   home.packages = with pkgs; [
-    
     kitty 
     zsh-powerlevel10k 
 
-    
     waybar
     mako 
     rofi-wayland 
@@ -33,8 +31,7 @@ in
     networkmanagerapplet 
     xfce.thunar
     
-    git
-    
+    git 
     python313
     poetry
     ruff
@@ -106,20 +103,16 @@ in
     chmod +x ${config.home.homeDirectory}/.config/waybar/custom/*
     chmod +x ${config.home.homeDirectory}/.config/waybar/custom/spotify/*
   '';
-
   
   programs.git = {
     enable = true;
-    userName = "lain";
-    userEmail = "lain@example.com"; 
+    userName = "alexey";
+    userEmail = "schwartzalexey@yandex.com"; 
   };
-
-  
   
   programs.vscode = {
     enable = true;
   };
-
   
   home.sessionVariables = {
     EDITOR = "code"; 
