@@ -12,7 +12,11 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      # Apply allowUnfree to the nixpkgs instance used by the flake
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       lib = nixpkgs.lib;
     in
     {
@@ -27,7 +31,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs pkgs lib; };
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.lain = {
                 imports = [ ./modules/home-manager/users/lain/user-specific.nix ];
               };
@@ -39,7 +43,7 @@
       homeConfigurations = {
         "lain@nixos" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs pkgs lib; };
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             ./modules/home-manager/users/lain/user-specific.nix
             ./modules/home-manager/home.nix

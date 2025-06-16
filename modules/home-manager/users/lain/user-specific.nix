@@ -1,4 +1,3 @@
-
 {
   config,
   pkgs,
@@ -8,18 +7,14 @@
 }:
 
 let
-  
-  
-  dotfilesDir = ../../../dotfiles;
+  dotfilesDir = ../../../../dotfiles;
 in
 {
-  
   home.packages = with pkgs; [
     
     kitty 
     zsh-powerlevel10k 
 
-    
     
     waybar
     mako 
@@ -29,22 +24,20 @@ in
     hypridle
     swaybg 
     neofetch
-    killall 
-
-    
+    killall
     firefox
     spotify
     vscode
     telegram-desktop
     pavucontrol 
     networkmanagerapplet 
-    (xfce.thunar.override { plugins = [ xfce.thunar-archive-plugin xfce.thunar-media-tags-plugin ]; }) 
-
+    xfce.thunar
     
     git
     
-    
-    python3.withPackages (ps: with ps; [ poetry ruff ]) 
+    python313
+    poetry
+    ruff
     postman 
     btop 
   ];
@@ -55,17 +48,9 @@ in
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    
-    
-    
-    
-    
-    
-    
+
     initExtra = ''
-      
-      
-      
+
       if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
         source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
       fi
@@ -73,14 +58,8 @@ in
       
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
-    
-    
-    
-    
-  };
-  
-  
 
+  };
   
   programs.kitty = {
     enable = true;
@@ -96,31 +75,31 @@ in
       enable_audio_bell = false;
       
     };
-    
-    configFile = ../../../dotfiles/kitty/kitty.conf; 
   };
 
-  
+  xdg.configFile = {
+    "kitty/kitty.conf".source = "${dotfilesDir}/kitty/kitty.conf"; # Use dotfilesDir
+  };
   
   
   home.file = {
-    ".config/hypr/hyprland.conf".source = lib.mkDefault ../../../dotfiles/hypr/hyprland.conf;
-    ".config/hypr/wp.jpg".source = lib.mkDefault ../../../dotfiles/hypr/wp.jpg;
+    ".config/hypr/hyprland.conf".source = lib.mkDefault "${dotfilesDir}/hypr/hyprland.conf"; # Use dotfilesDir
+    ".config/hypr/wp.jpg".source = lib.mkDefault "${dotfilesDir}/hypr/wp.jpg"; # Use dotfilesDir
     
-    ".config/waybar/config.jsonc".source = lib.mkDefault ../../../dotfiles/waybar/config.jsonc;
-    ".config/waybar/mocha.css".source = lib.mkDefault ../../../dotfiles/waybar/mocha.css;
-    ".config/waybar/style.css".source = lib.mkDefault ../../../dotfiles/waybar/style.css;
+    ".config/waybar/config.jsonc".source = lib.mkDefault "${dotfilesDir}/waybar/config.jsonc"; # Use dotfilesDir
+    ".config/waybar/mocha.css".source = lib.mkDefault "${dotfilesDir}/waybar/mocha.css"; # Use dotfilesDir
+    ".config/waybar/style.css".source = lib.mkDefault "${dotfilesDir}/waybar/style.css"; # Use dotfilesDir
     
-    ".config/waybar/custom/focus_class.sh".source = lib.mkDefault ../../../dotfiles/waybar/custom/focus_class.sh;
-    ".config/waybar/custom/spotify/mediaplayer.py".source = lib.mkDefault ../../../dotfiles/waybar/custom/spotify/mediaplayer.py;
+    ".config/waybar/custom/focus_class.sh".source = lib.mkDefault "${dotfilesDir}/waybar/custom/focus_class.sh"; # Use dotfilesDir
+    ".config/waybar/custom/spotify/mediaplayer.py".source = lib.mkDefault "${dotfilesDir}/waybar/custom/spotify/mediaplayer.py"; # Use dotfilesDir
 
     
-    ".config/rofi/colors.rasi".source = lib.mkDefault ../../../dotfiles/rofi/colors.rasi;
-    ".config/rofi/config.rasi".source = lib.mkDefault ../../../dotfiles/rofi/config.rasi;
-    ".config/rofi/fonts.rasi".source = lib.mkDefault ../../../dotfiles/rofi/fonts.rasi;
+    ".config/rofi/colors.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/colors.rasi"; # Use dotfilesDir
+    ".config/rofi/config.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/config.rasi"; # Use dotfilesDir
+    ".config/rofi/fonts.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/fonts.rasi"; # Use dotfilesDir
 
     
-    ".config/neofetch/config.conf".source = lib.mkDefault ../../../dotfiles/neofetch/config.conf;
+    ".config/neofetch/config.conf".source = lib.mkDefault "${dotfilesDir}/neofetch/config.conf"; # Use dotfilesDir
   };
 
   
@@ -135,35 +114,19 @@ in
     enable = true;
     userName = "lain";
     userEmail = "lain@example.com"; 
-    
-    
-    
   };
 
   
   
   programs.vscode = {
     enable = true;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   };
 
   
   home.sessionVariables = {
     EDITOR = "code"; 
     TERM = "kitty";   
-    
   };
-
   
-  
-  home.stateVersion = "24.05"; 
+  home.stateVersion = "25.05"; 
 }

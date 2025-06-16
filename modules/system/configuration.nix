@@ -37,6 +37,8 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.xkb = {
@@ -79,14 +81,12 @@
     shell = pkgs.zsh;
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
     stdenv.cc.cc.lib gcc-unwrapped.lib zlib
     shadowsocks-libev
     proxychains-ng
     wayland
-    (nerdfonts.override { fonts = [ "FiraCode" "Meslo" ]; })
+    nerd-fonts.fira-code
     material-design-icons material-symbols noto-fonts-emoji symbola fira fira-code meslo-lgs-nf font-awesome
     grim slurp wl-clipboard
   ];
