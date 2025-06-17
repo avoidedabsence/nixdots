@@ -88,8 +88,7 @@ in
     ".config/waybar/style.css".source = lib.mkDefault "${dotfilesDir}/waybar/style.css"; 
     
     ".config/waybar/custom/focus_class.sh".source = lib.mkDefault "${dotfilesDir}/waybar/custom/focus_class.sh"; 
-    ".config/waybar/custom/spotify/mediaplayer.py".source = lib.mkDefault "${dotfilesDir}/waybar/custom/spotify/mediaplayer.py"; 
-
+    ".config/waybar/custom/spotify/mediaplayer_nix.py".source = lib.mkDefault "${dotfilesDir}/waybar/custom/spotify/mediaplayer_nix.py"; 
     
     ".config/rofi/colors.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/colors.rasi"; 
     ".config/rofi/config.rasi".source = lib.mkDefault "${dotfilesDir}/rofi/config.rasi"; 
