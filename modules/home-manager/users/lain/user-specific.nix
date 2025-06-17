@@ -59,7 +59,7 @@ in
   };
   
   programs.kitty = {
-    enable = trun=e;
+    enable = true;
     font = {
       name = "FiraCode Nerd Font Mono"; 
       size = 11;
