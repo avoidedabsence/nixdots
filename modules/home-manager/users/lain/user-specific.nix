@@ -33,6 +33,7 @@ in
     
     git 
     python313
+    playerctl
     poetry
     ruff
     postman 
@@ -58,7 +59,7 @@ in
   };
   
   programs.kitty = {
-    enable = true;
+    enable = trun=e;
     font = {
       name = "FiraCode Nerd Font Mono"; 
       size = 11;

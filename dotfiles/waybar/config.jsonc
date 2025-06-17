@@ -106,7 +106,7 @@
         "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%"
     },
     "custom/spotify": {
-        "exec": "python3 ~/.config/waybar/custom/spotify/mediaplayer.py --player spotify",
+        "exec": "python3 ~/.config/waybar/custom/spotify/mediaplayer_nix.py --player spotify",
         "format": "{text:.50}  ",
         "tooltip-format": "{text}",
         "return-type": "json",
