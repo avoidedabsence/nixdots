@@ -1,32 +1,49 @@
-# lain@nixdots
+# avoidedabsence@dotfiles
 
-## Installation
+## Quick Setup
 
-1. Enable **nix-command** and **flakes**, as they are experimental features
+1. **Edit `config.nix`** to customize hostname, services & etc.
+
+2. **Enable nix-command and flakes** (experimental features):
 
    ```nix
    nix.settings.experimental-features = [ "nix-command" "flakes" ];
    ```
 
-2. Switch to:
+3. **Copy your hardware configuration**:
 
-   - the **whole** flake: `sudo nixos-rebuild switch --flake .#navi`
+   ```bash
+   sudo nixos-generate-config --show-hardware-config > modules/hardware/hardware-configuration.nix
+   ```
 
-   - only the **home-manager** (dots w/o hardware, be sure to have all needed desktop env enabled): `home-manager switch --flake .#lain`
+4. **Switch to the flake**:
+   - **Full system**: `sudo nixos-rebuild switch --flake .#your-hostname`
+   - **Home-manager only**: `home-manager switch --flake .#your-username`
 
-## Optionally
+## Configuration Options
 
-You can change **hostname** and **username** by slightly tweaking the `flake.nix` (change *navi* and *lain* to wanted) and renaming the `modules/home-manager/users/lain` directory.
+All customizable options are in `config.nix`:
 
-Also, there is a **shadowsocks-libev** service that automatically starts shadowsocks proxy from `~/proj/conf.json` directory. Comment it out, if you do not need it.
+- **System Identity**: hostname username and desc
+- **Localization**: timezone and locale
+- **Hardware**: gpu drivers and power management
+- **Services**: Shadowsocks, PostgreSQL, Redis, ClickHouse -- some development tools
 
-## TODO
+## Advanced Customization
 
-- [ ] ZSH
-- [x] Telegram
-- [ ] Spicetify
-- [x] Tweaks on waybar, rofi
+### Dotfiles
+
+All dotfiles are stored in the `dotfiles/` directory and are automatically linked to your home directory.
+
+In order to make changes to the DE, reinstantiate home-manager: `home-manager switch --flake .#your-username`
 
 ### Telegram theme
 
 Theme for desktop can be installed here: [*boop*](https://t.me/addtheme/wh60qgGElK6HaBES), although its kinda raw so i will be improving it on the way
+
+## TODO
+
+- [x] Telegram
+- [x] Tweaks on waybar, rofi
+- [ ] ZSH
+- [ ] Spicetify

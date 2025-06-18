@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration for lain";
+  description = "NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -11,6 +11,8 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
+      config = import ./config.nix;
+      
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
@@ -20,9 +22,9 @@
     in
     {
       nixosConfigurations = {
-        navi = lib.nixosSystem {
+        ${config.hostname} = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs pkgs lib; };
+          specialArgs = { inherit inputs pkgs lib config; };
           modules = [
             ./modules/system/configuration.nix
             ./modules/hardware/hardware-configuration.nix
@@ -30,9 +32,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.lain = {
-                imports = [ ./modules/home-manager/users/lain/user-specific.nix ];
+              home-manager.extraSpecialArgs = { inherit inputs config; };
+              home-manager.users.${config.username} = {
+                imports = [ ./modules/home-manager/users/user-specific.nix ];
               };
             }
           ];
@@ -40,11 +42,11 @@
       };
 
       homeConfigurations = {
-        "lain" = home-manager.lib.homeManagerConfiguration {
+        ${config.username} = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs config; };
           modules = [
-            ./modules/home-manager/users/lain/user-specific.nix
+            ./modules/home-manager/users/user-specific.nix
             ./modules/home-manager/home.nix
           ];
         };

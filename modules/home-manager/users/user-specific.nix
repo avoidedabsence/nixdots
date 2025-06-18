@@ -3,16 +3,16 @@
   pkgs,
   lib,
   inputs,
+  config: userConfig,
   ... 
 }:
 
 let
   dotfilesDir = ../../../../dotfiles;
-  userName = builtins.baseNameOf (builtins.dirOf ./.);
 in
 {
-  home.username = userName;
-  home.homeDirectory = /home/${userName};
+  home.username = userConfig.username;
+  home.homeDirectory = "/home/${userConfig.username}";
 
   home.packages = with pkgs; [
     kitty 
@@ -70,11 +70,9 @@ in
     };
     
     settings = {
-      
       linux_display_server = "wayland";
       scrollback_lines = 2000;
       enable_audio_bell = false;
-      
     };
   };
 
@@ -110,9 +108,9 @@ in
   '';
   
   programs.git = {
-    enable = true;
-    userName = "default";
-    userEmail = "default@ex.com"; 
+    enable = userConfig.gitEnable;
+    userName = userConfig.gitName;
+    userEmail = userConfig.gitEmail; 
   };
   
   programs.vscode = {
@@ -120,7 +118,7 @@ in
   };
   
   home.sessionVariables = {
-    EDITOR = "code"; 
+    EDITOR = userConfig.defaultEditor; 
     TERM = "kitty";
   };
   

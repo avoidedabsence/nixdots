@@ -1,40 +1,40 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, config: userConfig, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ]; # import these in your config in order to use flakes
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_zen; # for AMD iGPU & nVidia GPU maximum performance, could be changed to legacy kernel or others
 
-  networking.hostName = "navi";
+  networking.hostName = userConfig.hostname;
   networking.networkmanager.enable = true;
 
-  systemd.services.shadowsocks = {
+  systemd.services.shadowsocks = lib.mkIf userConfig.enableShadowsocks {
     description = "Shadowsocks-libev proxy";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.shadowsocks-libev}/bin/ss-local \
-          -c "/home/lain/proj/cfg.json"
+          -c "${userConfig.shadowsocksConfigPath}"
       '';
       Restart = "always";
     };
   };
 
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = userConfig.timeZone;
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = userConfig.locale;
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = userConfig.locale;
+    LC_IDENTIFICATION = userConfig.locale;
+    LC_MEASUREMENT = userConfig.locale;
+    LC_MONETARY = userConfig.locale;
+    LC_NAME = userConfig.locale;
+    LC_NUMERIC = userConfig.locale;
+    LC_PAPER = userConfig.locale;
+    LC_TELEPHONE = userConfig.locale;
+    LC_TIME = userConfig.locale;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -58,10 +58,10 @@
     pulse.enable = true;
   };
 
-  hardware.nvidia.open = true;
-  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.open = lib.mkIf userConfig.enableNvidia true;
+  hardware.nvidia.modesetting.enable = lib.mkIf userConfig.enableNvidia true;
 
-  services.tlp = {
+  services.tlp = lib.mkIf userConfig.enableTLP {
     enable = true;
     settings = {
       PCIE_ASPM_ON_BAT = "performance";
@@ -74,9 +74,9 @@
 
   programs.zsh.enable = true;
 
-  users.users.lain = {
+  users.users.${userConfig.username} = {
     isNormalUser = true;
-    description = "lain";
+    description = userConfig.userDescription;
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
     shell = pkgs.zsh;
   };
@@ -85,7 +85,7 @@
     home-manager
     stdenv.cc.cc.lib gcc-unwrapped.lib zlib
     shadowsocks-libev
-    proxychains-ng
+    proxychains-ng # For launching apps under proxy from rofi
     wayland
     grim slurp wl-clipboard
   ];
@@ -98,22 +98,17 @@
     fira
     fira-code
     meslo-lgs-nf
-    font-awesome
+    font-awesome # fuck jetbrains mono
   ];
 
-  services.postgresql = {
-    enable = true;
-  };
-  services.redis.enable = true;
-  services.clickhouse = {
-    enable = true;
-    package = pkgs.clickhouse;
-  };
+  services.postgresql.enable = userConfig.enablePostgreSQL;
+  services.redis.enable = userConfig.enableRedis;
+  services.clickhouse.enable = userConfig.enableClickhouse;
 
   environment.variables = {
     NIXOS_OZONE_WL = "1";
-    LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.gcc-unwrapped.lib pkgs.zlib ];
+    LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.gcc-unwrapped.lib pkgs.zlib ]; # For numpy / levenshtein support
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }
