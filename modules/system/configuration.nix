@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, config: userConfig, ... }:
+{ config, pkgs, lib, inputs, userConfig, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # import these in your config in order to use flakes

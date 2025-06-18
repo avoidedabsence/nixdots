@@ -3,7 +3,7 @@
   pkgs,
   lib,
   inputs,
-  config: userConfig,
+  userConfig,
   ... 
 }:
 
