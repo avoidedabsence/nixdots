@@ -82,6 +82,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    home-manager
     stdenv.cc.cc.lib gcc-unwrapped.lib zlib
     shadowsocks-libev
     proxychains-ng
@@ -111,6 +112,7 @@
 
   environment.variables = {
     NIXOS_OZONE_WL = "1";
+    LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.gcc-unwrapped.lib pkgs.zlib ];
   };
 
   system.stateVersion = "24.05";

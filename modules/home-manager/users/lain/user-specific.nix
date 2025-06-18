@@ -117,7 +117,7 @@ in
   
   home.sessionVariables = {
     EDITOR = "code"; 
-    TERM = "kitty";   
+    TERM = "kitty";
   };
   
   home.stateVersion = "25.05"; 
