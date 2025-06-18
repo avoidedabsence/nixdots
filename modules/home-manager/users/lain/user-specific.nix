@@ -10,6 +10,9 @@ let
   dotfilesDir = ../../../../dotfiles;
 in
 {
+  home.username = "lain";
+  home.homeDirectory = /home/lain;
+
   home.packages = with pkgs; [
     kitty 
     zsh-powerlevel10k 

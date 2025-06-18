@@ -24,7 +24,8 @@ configuration {
 @import                          "./fonts.rasi"
 
 * {
-    border-colour:               var(selected);
+    border-colour:               var(border);
+    bordercolto:                 var(border-inac);
     handle-colour:               var(selected);
     background-colour:           var(background);
     foreground-colour:           var(foreground);
@@ -65,8 +66,8 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
+    border-radius:               15px;
+    border-color:                @bordercolto;
     cursor:                      "default";
     background-color:            @background-colour;
     /* Add blur effect */
@@ -193,7 +194,7 @@ element {
     padding:                     5px 10px;
     border:                      0px solid;
     border-radius:               10px;
-    border-color:                @border-colour;
+    border-color:                @selected;
     background-color:            transparent;
     text-color:                  @foreground-colour;
     cursor:                      pointer;

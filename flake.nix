@@ -40,7 +40,7 @@
       };
 
       homeConfigurations = {
-        "lain@navi" = home-manager.lib.homeManagerConfiguration {
+        "lain" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
           modules = [

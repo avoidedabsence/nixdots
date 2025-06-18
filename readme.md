@@ -1,7 +1,11 @@
 # TODO
 
 - [ ] ZSH
-- [ ] Telegram
+- [x] Telegram
 - [ ] Spicetify
-- [ ] Tweaks on waybar, rofi
-- [ ] Change mako -> dunst (or other customizable shi)
+- [x] Tweaks on waybar, rofi
+
+### Telegram theme:
+
+`https://t.me/addtheme/wh60qgGElK6HaBES`
+

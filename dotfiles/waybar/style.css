@@ -1,8 +1,6 @@
-@import "mocha.css";
-
 * {
   border: none;
-  border-radius: 6px;
+  border-radius: 15px;
   min-height: 0;
   font-family: "Fira Sans";
   font-weight: 500;
@@ -11,7 +9,7 @@
 }
 
 window#waybar {
-  background: rgba(20, 20, 30, 0.25);
+  background: rgba(20, 20, 30, 0.125);
   border: none;
   border-radius: 15px;
 }
@@ -20,7 +18,7 @@ tooltip {
   background-color: rgba(20, 20, 30, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  color: @text;
+  color: rgba(187, 170, 176, 1);
 }
 
 #clock,
@@ -32,15 +30,15 @@ tooltip {
   background-color: rgba(40, 40, 55, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  color: @text;
-  text-shadow: 0 0 6px rgba(149, 103, 142, 0.8), 0 0 12px rgba(149, 103, 142, 0.6);
+  color: rgba(187, 170, 176, 1);
+  text-shadow: 0 0 6px rgba(187, 170, 176, 0.8), 0 0 12px rgba(187, 170, 176, 0.6);
   margin: 6px 6px 6px 2px;
   padding: 2px 8px;
 }
 
 #window {
-  text-shadow: 0 0 8px rgba(149, 103, 142, 1), 0 0 16px rgba(149, 103, 142, 0.9);
-  color: @text;
+  text-shadow: 0 0 8px rgba(187, 170, 176, 1), 0 0 16px rgba(187, 170, 176, 0.9);
+  color: rgba(187, 170, 176, 1);
   margin: 6px 6px 6px 0px;
   padding: 2px 8px;
   background: rgba(40, 40, 55, 0.3);
@@ -50,8 +48,8 @@ tooltip {
 #tray {
   background-color: rgba(40, 40, 55, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: @text;
-  text-shadow: 0 0 6px rgba(149, 103, 142, 0.8), 0 0 12px rgba(149, 103, 142, 0.6);
+  color: rgba(187, 170, 176, 1);
+  text-shadow: 0 0 6px rgba(187, 170, 176, 0.8), 0 0 12px rgba(187, 170, 176, 0.6);
   margin: 6px 0px 6px 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   padding: 2px 8px;
@@ -66,12 +64,12 @@ tooltip {
 
 #workspaces button {
   all: initial;
-  color: @text;
+  color: rgba(187, 170, 176, 1);
   background-color: rgba(40, 40, 55, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   padding: 2px 8px;
-  border-radius: 6px;
+  border-radius: 15px;
 }
 
 #workspaces button:not(:first-child) {
@@ -81,32 +79,16 @@ tooltip {
 #workspaces button.active {
   background-color: rgba(60, 60, 80, 0.8);
   border: 1px solid rgba(206, 171, 255, 0.3);
-  box-shadow: 0 0 4px #ceabff, 0 2px 8px rgba(0, 0, 0, 0.3);
-  color: @text;
-}
-
-#workspaces button.urgent {
-  background-color: @overlay1;
-  color: @text;
-  box-shadow: 0 0 3px @pink;
-}
-
-#cpu.critical,
-#memory.critical,
-#battery.warning,
-#battery.critical,
-#battery.urgent {
-  background-color: @overlay1;
-  box-shadow: 0 0 4px @red;
-  color: @red;
+  box-shadow: 0 0 4px rgba(187, 170, 176, 1), 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: rgba(187, 170, 176, 1);
 }
 
 .custom-spotify {
   background-color: rgba(40, 40, 55, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  color: @text;
-  text-shadow: 0 0 6px rgba(149, 103, 142, 0.8), 0 0 12px rgba(149, 103, 142, 0.6);
+  color: rgba(187, 170, 176, 1);
+  text-shadow: 0 0 6px rgba(187, 170, 176, 0.8), 0 0 12px rgba(187, 170, 176, 0.6);
   margin: 6px 2px 6px 6px;
   padding: 2px 8px;
   padding-left: 6px;

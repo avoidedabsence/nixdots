@@ -27,9 +27,10 @@
         "rewrite": {
             "(.*) — Zen Browser": "$1",
             "tms": "Terminal: Kitty",
-            "t": "Terminal: Kitty"
+            "t": "Terminal: Kitty",
+            "": "∅"
         },
-        "tooltip-format": "{title}\n\nClass: {class}",
+        "tooltip": false,
         "separate-outputs": true
     },
     "hyprland/workspaces": {
