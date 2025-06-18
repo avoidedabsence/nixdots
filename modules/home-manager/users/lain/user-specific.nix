@@ -8,10 +8,11 @@
 
 let
   dotfilesDir = ../../../../dotfiles;
+  userName = builtins.baseNameOf (builtins.dirOf ./.);
 in
 {
-  home.username = "lain";
-  home.homeDirectory = /home/lain;
+  home.username = userName;
+  home.homeDirectory = /home/${userName};
 
   home.packages = with pkgs; [
     kitty 
@@ -110,8 +111,8 @@ in
   
   programs.git = {
     enable = true;
-    userName = "alexey";
-    userEmail = "schwartzalexey@yandex.com"; 
+    userName = "default";
+    userEmail = "default@ex.com"; 
   };
   
   programs.vscode = {
