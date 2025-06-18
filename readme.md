@@ -5,7 +5,8 @@
 - [ ] Spicetify
 - [x] Tweaks on waybar, rofi
 
-### Telegram theme:
+## Optionally
+
+### Telegram theme
 
 `https://t.me/addtheme/wh60qgGElK6HaBES`
-
