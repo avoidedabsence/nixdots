@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration";
+  description = "avoidedabsence@nixdots";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
