@@ -41,6 +41,14 @@ In order to make changes to the DE, reinstantiate home-manager: `home-manager sw
 
 Theme for desktop can be installed here: [*boop*](https://t.me/addtheme/wh60qgGElK6HaBES), although its kinda raw so i will be improving it on the way
 
+### VSCode theme
+
+Noctis Bordo
+
+### Firefox theme
+
+[Click here to install](https://color.firefox.com/?theme=XQAAAALZAQAAAAAAAABBKYhm849SCicxcT-BCXcGHf3p79EhVPa0joM10zEYCyKWGeqH6_E04jhcpYMF9JajctB9RJA3fCCzoZ5WHei3gzqTG5hjo2oSADefYVWNqZ2qsVIwapQUdZV7BDoKSoOLWcddQaEOn8irmsnpkXzOnktJegfCVQICUpX3yy4Qv46jbHcythhTuVaABprTo1fZHqSlaJO2XZGaCY3bXxcN7FikgXe9_mkK7z0r4nl_29FhM9MtNavDgrQkZEvqqGNFqenbnda4qdVoJzdkJyx14LymXb2U1kpAVnQqaRwdukP2Yk8j5G9gJH0ojuupu2onKY7v_2LSowA)
+
 ## TODO
 
 - [x] Telegram
