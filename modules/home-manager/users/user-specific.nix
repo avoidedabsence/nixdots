@@ -8,7 +8,7 @@
 }:
 
 let
-  dotfilesDir = ../../../../dotfiles;
+  dotfilesDir = ../../../dotfiles;
 in
 {
   home.username = userConfig.username;
