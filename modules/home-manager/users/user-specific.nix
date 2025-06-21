@@ -11,6 +11,11 @@ let
   dotfilesDir = ../../../dotfiles;
 in
 {
+
+  imports = [
+    inputs.zen-browser.homeModules.twilight
+  ];
+
   home.username = userConfig.username;
   home.homeDirectory = "/home/${userConfig.username}";
 
@@ -27,7 +32,6 @@ in
     swaybg 
     neofetch
     killall
-    firefox
     spotify
     vscode
     telegram-desktop
@@ -43,6 +47,14 @@ in
     postman 
     btop 
   ];
+
+  programs.zen-browser = {
+    enable = true;
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+    };
+  };
 
   programs.zsh = {
     enable = true;

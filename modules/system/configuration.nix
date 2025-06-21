@@ -57,24 +57,38 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  
+  hardware.nvidia = lib.mkIf userConfig.enableNvidia {
+    open = true; 
+    modesetting.enable = true; 
+    powerManagement.enable = false;
+  };
 
-  hardware.nvidia.open = lib.mkIf userConfig.enableNvidia true;
-  hardware.nvidia.modesetting.enable = lib.mkIf userConfig.enableNvidia true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; 
+  };
 
   services.tlp = lib.mkIf userConfig.enableTLP {
     enable = true;
     settings = {
-      PCIE_ASPM_ON_BAT = "performance";
+      RADEON_DPM_PERF_LEVEL_ON_AC = "high";
+      RADEON_DPM_PERF_LEVEL_ON_BAT = "high";
+      RADEON_DPM_STATE_ON_AC = "performance";
+      RADEON_DPM_STATE_ON_BAT = "performance";
+      
       PCIE_ASPM_ON_AC = "performance";
-      USB_AUTOSUSPEND = 1;
+      PCIE_ASPM_ON_BAT = "performance";
+      
       RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_BAT = "auto";
+      
+      USB_AUTOSUSPEND = 0;
     };
   };
   services.power-profiles-daemon.enable = false;
 
-  programs.zsh.enable = true;
-
-  users.users.${userConfig.username} = {
+  users.users.lain = {
     isNormalUser = true;
     description = userConfig.userDescription;
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
