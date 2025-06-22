@@ -86,9 +86,10 @@
       USB_AUTOSUSPEND = 0;
     };
   };
+  
   services.power-profiles-daemon.enable = false;
 
-  users.users.lain = {
+  users.users.${userConfig.username} = {
     isNormalUser = true;
     description = userConfig.userDescription;
     extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
@@ -97,7 +98,7 @@
 
   environment.systemPackages = with pkgs; [
     home-manager
-    stdenv.cc.cc.lib gcc-unwrapped.lib zlib
+    stdenv.cc.cc.lib gcc-unwrapped.lib zlib gnumake
     shadowsocks-libev
     proxychains-ng # For launching apps under proxy from rofi
     wayland
@@ -114,6 +115,10 @@
     meslo-lgs-nf
     font-awesome # fuck jetbrains mono
   ];
+
+  virtualisation.docker.enable = userConfig.enableDocker;
+
+  users.extraGroups.docker.members = lib.mkIf userConfig.enableDocker [ userConfig.username ];
 
   services.postgresql.enable = userConfig.enablePostgreSQL;
   services.redis.enable = userConfig.enableRedis;

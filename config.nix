@@ -18,6 +18,7 @@
   enableShadowsocks = true;
   shadowsocksConfigPath = "/home/lain/proj/cfg.json"; # shadowsocks server config, set enable to false if you do not want to use shadowsocks
 
+  enableDocker = true;
   enablePostgreSQL = true;
   enableRedis = true;
   enableClickhouse = true;
