@@ -11,7 +11,6 @@ let
   dotfilesDir = ../../../dotfiles;
 in
 {
-
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
@@ -32,6 +31,7 @@ in
     swaybg 
     neofetch
     killall
+    vesktop
     spotify
     vscode
     telegram-desktop
@@ -41,6 +41,8 @@ in
     
     git 
     python313
+    nodejs_24
+    nmap
     playerctl
     poetry
     ruff
@@ -134,5 +136,5 @@ in
     TERM = "kitty";
   };
   
-  home.stateVersion = "25.05"; 
+  home.stateVersion = "25.11"; 
 }

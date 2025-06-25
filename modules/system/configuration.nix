@@ -1,7 +1,17 @@
 { config, pkgs, lib, inputs, userConfig, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; # import these in your config in order to use flakes
+  nix.settings = {
+    warn-dirty = false;
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ]; # import these in your config in order to use flakes
+  };
+
+  nix.gc = {
+		automatic = true;
+		dates = "weekly";
+		options = "--delete-older-than 7d";
+	}; 
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -9,6 +19,10 @@
 
   networking.hostName = userConfig.hostname;
   networking.networkmanager.enable = true;
+
+  networking.extraHosts = ''
+    127.0.0.1 myapp.lc
+  '';
 
   systemd.services.shadowsocks = lib.mkIf userConfig.enableShadowsocks {
     description = "Shadowsocks-libev proxy";
@@ -45,7 +59,9 @@
     layout = "us,ru";
     options = "grp:alt_shift_toggle";
   };
+
   programs.hyprland.enable = true;
+  programs.zsh.enable = true; # idk why
 
   services.printing.enable = true;
 
@@ -99,9 +115,10 @@
   environment.systemPackages = with pkgs; [
     home-manager
     stdenv.cc.cc.lib gcc-unwrapped.lib zlib gnumake
-    shadowsocks-libev
+    shadowsocks-libev openssl
     proxychains-ng # For launching apps under proxy from rofi
     wayland
+    obs-studio
     grim slurp wl-clipboard
   ];
 
@@ -129,5 +146,5 @@
     LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.gcc-unwrapped.lib pkgs.zlib ]; # For numpy / levenshtein support
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
