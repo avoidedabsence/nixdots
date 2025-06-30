@@ -7,11 +7,11 @@
   gitName = "alexey";
   gitEmail = "schwartzalexey@yandex.com";
 
-  defaultEditor = "code";
-  
+  defaultEditor = "zed";
+
   timeZone = "Europe/Moscow";
   locale = "en_US.UTF-8";
-  
+
   enableNvidia = true; # open drivers, if you have legacy gpu change that in configuration.nix
   enableTLP = true; # tlp (power mgmt) for AMD iGPU, practically disables any powersaving, set to false or modify in configuration.nix you have Intel
 

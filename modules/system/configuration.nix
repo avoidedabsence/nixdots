@@ -36,6 +36,18 @@
     };
   };
 
+  programs.proxychains = {
+    enable = true;
+    proxies = {
+      main = {
+        type = "socks5";
+        host = "127.0.0.1";
+        port = 1080;
+      };
+    };
+    chain.type = "dynamic";
+  };
+
   time.timeZone = userConfig.timeZone;
 
   i18n.defaultLocale = userConfig.locale;
@@ -115,8 +127,7 @@
   environment.systemPackages = with pkgs; [
     home-manager
     stdenv.cc.cc.lib gcc-unwrapped.lib zlib gnumake
-    shadowsocks-libev openssl
-    proxychains-ng # For launching apps under proxy from rofi
+    shadowsocks-libev openssl # For launching apps under proxy from rofi
     wayland
     obs-studio
     grim slurp wl-clipboard
@@ -140,6 +151,8 @@
   services.postgresql.enable = userConfig.enablePostgreSQL;
   services.redis.enable = userConfig.enableRedis;
   services.clickhouse.enable = userConfig.enableClickhouse;
+
+  services.flatpak.enable = true;
 
   environment.variables = {
     NIXOS_OZONE_WL = "1";
