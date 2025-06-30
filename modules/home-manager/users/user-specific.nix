@@ -32,7 +32,6 @@ in
     neofetch
     killall
     spotify
-    vscode
     telegram-desktop
     pavucontrol
     networkmanagerapplet

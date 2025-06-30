@@ -11,7 +11,7 @@
 		automatic = true;
 		dates = "weekly";
 		options = "--delete-older-than 7d";
-	}; 
+	};
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -75,6 +75,8 @@
   programs.hyprland.enable = true;
   programs.zsh.enable = true; # idk why
 
+  programs.ssh.startAgent = true;
+
   services.printing.enable = true;
 
   services.pulseaudio.enable = false;
@@ -85,16 +87,16 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  
+
   hardware.nvidia = lib.mkIf userConfig.enableNvidia {
-    open = true; 
-    modesetting.enable = true; 
+    open = true;
+    modesetting.enable = true;
     powerManagement.enable = false;
   };
 
   hardware.graphics = {
     enable = true;
-    enable32Bit = true; 
+    enable32Bit = true;
   };
 
   services.tlp = lib.mkIf userConfig.enableTLP {
@@ -104,17 +106,17 @@
       RADEON_DPM_PERF_LEVEL_ON_BAT = "high";
       RADEON_DPM_STATE_ON_AC = "performance";
       RADEON_DPM_STATE_ON_BAT = "performance";
-      
+
       PCIE_ASPM_ON_AC = "performance";
       PCIE_ASPM_ON_BAT = "performance";
-      
+
       RUNTIME_PM_ON_AC = "on";
       RUNTIME_PM_ON_BAT = "auto";
-      
+
       USB_AUTOSUSPEND = 0;
     };
   };
-  
+
   services.power-profiles-daemon.enable = false;
 
   users.users.${userConfig.username} = {
@@ -133,7 +135,7 @@
     grim slurp wl-clipboard
   ];
 
-  fonts.packages = with pkgs; [      
+  fonts.packages = with pkgs; [
     material-design-icons
     material-symbols
     noto-fonts-emoji
@@ -157,6 +159,10 @@
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib pkgs.gcc-unwrapped.lib pkgs.zlib ]; # For numpy / levenshtein support
+  };
+
+  environment.sessionVariables = {
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
   };
 
   system.stateVersion = "25.11";
